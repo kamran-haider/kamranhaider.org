@@ -1,0 +1,104 @@
+@import 'mixins/color';
+@import 'mixins/clearfix';
+@import 'mixins/fluid-type';
+@import 'mixins/float';
+@import 'mixins/image';
+@import 'mixins/lists';
+@import 'mixins/text-truncate';
+
+/* COLUMNS */
+
+@mixin columns($count: 3, $gap: 10) {
+    -webkit-column-count: $count;
+    -moz-column-count:    $count;
+    column-count:         $count;
+
+    -webkit-column-gap:   $gap;
+    -moz-column-gap:      $gap;
+    column-gap:           $gap;
+}
+
+/* TRANSITION */
+@mixin transit($what: all, $length: 1s, $easing: ease-in-out) {
+    -moz-transition:    $what $length $easing;
+    -o-transition:      $what $length $easing;
+    -webkit-transition: $what $length $easing;
+    -ms-transition:     $what $length $easing;
+    transition:         $what $length $easing;
+
+}
+
+/* TEXT SHADOW */
+@mixin tshd($x: 2px, $y: 2px, $blur: 5px, $color: rgba(0,0,0,.4)) {
+    text-shadow: $x $y $blur $color;
+}
+
+// BORDER RADIUS
+@mixin br($radius: 5px) {
+    -moz-border-radius:    $radius;
+    -webkit-border-radius: $radius;
+    border-radius:         $radius;
+}
+
+// Underline
+@mixin underline($width: 2px, $style: solid, $border-color: $link) {
+  border-bottom: 2px solid $border-color;
+}
+
+
+
+// Defaults which you can freely override
+$column-width: 7%;
+$gutter-width: 3%;
+$columns: 10;
+
+$total-width: 100%;
+
+
+// Utility function — you should never need to modify this
+@function gridsystem-width($columns:$columns) {
+	@return ($column-width * $columns) + ($gutter-width * $columns);
+}
+
+// Set $total-width to 100% for a fluid layout
+$total-width: gridsystem-width($columns);
+
+// Uncomment these two lines and the star-hack width/margin lines below to enable sub-pixel fix for IE6 & 7. See http://tylertate.com/blog/2012/01/05/subpixel-rounding.html
+// $min-width: 999999;
+// $correction: 0.5 / $min-width * 100;
+
+// The micro clearfix http://nicolasgallagher.com/micro-clearfix-hack/
+
+
+//////////
+// GRID //
+//////////
+
+body {
+	width: 100%;
+	@include clearfix;
+}
+
+@mixin row($columns:$columns) {
+	display: block;
+	width: $total-width*(($gutter-width + gridsystem-width($columns))/gridsystem-width($columns));
+	margin: 0 $total-width*((($gutter-width*.5)/gridsystem-width($columns))*-1);
+	// *width: $total-width*(($gutter-width + gridsystem-width($columns))/gridsystem-width($columns))-$correction;
+	// *margin: 0 $total-width*((($gutter-width*.5)/gridsystem-width($columns))*-1)-$correction;
+	@include clearfix;
+}
+
+@mixin column($x,$columns:$columns) {
+	display: inline;
+	float: left;
+	width: $total-width*(((($gutter-width+$column-width)*$x)-$gutter-width) / gridsystem-width($columns));
+	margin: 0 $total-width*(($gutter-width*.5)/gridsystem-width($columns));
+	// *width: $total-width*(((($gutter-width+$column-width)*$x)-$gutter-width) / gridsystem-width($columns))-$correction;
+	// *margin: 0 $total-width*(($gutter-width*.5)/gridsystem-width($columns))-$correction;
+}
+@mixin push($offset:1) {
+	margin-left: $total-width*((($gutter-width+$column-width)*$offset) / gridsystem-width($columns)) + $total-width*(($gutter-width*.5)/gridsystem-width($columns));
+}
+@mixin pull($offset:1) {
+	margin-right: $total-width*((($gutter-width+$column-width)*$offset) / gridsystem-width($columns)) + $total-width*(($gutter-width*.5)/gridsystem-width($columns));
+}
