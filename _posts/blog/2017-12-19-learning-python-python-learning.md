@@ -7,6 +7,7 @@ last_modified_at:
 tags: 
   - Python
   - Education
+published: false
 ---
 
 In this post, I will commnet on how I think Python is emerging as a teaching modality and provide a list of resources that I came across in the past few months that are built around this idea. 
