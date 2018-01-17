@@ -17,17 +17,17 @@ Within minutes of googling deep learning, I noticed how amazingly easy it is to 
 I spent the last couple of weeks coding up a simple [implementation](https://github.com/kamran-haider/bbbp_ml_study/tree/master/code/toyNN) of a deep neural network based on whatever I have learnt so far (I call it `toyNN`). Obviously, there are infinitely better implementations available in the tools that I mentioned above. However, the motivation behind creating `toyNN` was to get a better understanding of how deep neural networks really work. As I was coding this up, I was thinking about the idea of learning by doing. I would digress a little bit just to share an anecdote. 
 
 I was visiting a collaborator at University of Cambridge in December 2012 and got lucky to catch a talk by the great [David Baker](https://www.bakerlab.org/) (one of my most favorite scientists). He said, while talking about the motivation behind designing proteins in the laboratory, 
-**"We don’t know much about proteins, so we thought we should just create them to get a better understanding.”** His nonchalance felt even more impressive after he gave a fascinating talk on his work. I thought this must be an empowering feeling. So I decided to use this idea as a general principle to understand things better by 'just building them'. That’s why despite the abundance of great deep learning libraries, I wanted to spend some time coding up a neural network from scratch.
+**"We don’t know much about proteins, so we thought we should just create them to get a better understanding.”** His nonchalance felt even more impressive after he gave a fascinating talk on his work. I thought this must be an empowering feeling. So I decided to use this idea as a general principle to understand things better, i.e., 'just build them'. That’s why despite the abundance of great deep learning libraries, I wanted to spend some time coding up a neural network from scratch.
 
-I wouldn't go ahead and give an introduction to deep learning or neural networks here and rather recommend readers the [first chapter](http://neuralnetworksanddeeplearning.com/chap1.html) of Michael Nielsen's book. I will just add a couple of notes about my implementation. 
+I wouldn't go ahead and give an introduction to deep learning or neural networks here and rather point readers to the [first chapter](http://neuralnetworksanddeeplearning.com/chap1.html) of Michael Nielsen's book. I will just add a couple of notes about my implementation. 
 
-I am a fan of `scikit-learn` API, which closely follows how machine learning projects are structured in general. Once the data has been adequately pre-processed, a machine learning is done with the following steps in `scikit-learn`:
+I am a fan of `scikit-learn` API, which closely follows how machine learning projects are structured in general. Once the data has been adequately pre-processed, a machine learning task can be done with the following steps in `scikit-learn`:
 
 * Choosing a model
 * Fitting model to the data with `fit()` 
 * Applying the trained model to new data with `predict()`
 
-Following this API and the module organization of `Keras`, I created a module called `models` that consists of different types of of deep neural networks that are supported. Currently, only one type is implemented which is called, `BasicDeepModel`. As you'd have guessed, each type of model has `fit()` and `predict()` functions. An example workflow for a binary classification problem would look like:
+Following this API and the module organization of `Keras`, I created a module called `models` that consists of different typepes of of deep neural networks that are supported. Currently, only one type is implemented which is called, `BasicDeepModel`. As you'd have guessed, each type of model has `fit()` and `predict()` functions. An example workflow for a binary classification problem would look like:
 
 ```python
 from toyNN.models import BasicDeepModel
@@ -39,7 +39,7 @@ test_data = "toyNN/tests/test_datasets/test_catvnoncat.h5"
 train_x_orig, train_y, test_x_orig, test_y, classes = load_test_data(training_data, test_data)
 num_px = train_x_orig.shape[1]
 
-# Pre-process of data
+# Pre-processing of data
 train_x_flatten = train_x_orig.reshape(train_x_orig.shape[0], -1).T
 test_x_flatten = test_x_orig.reshape(test_x_orig.shape[0], -1).T
 train_x = train_x_flatten/255.
@@ -54,7 +54,7 @@ predictions = model.predict(test_x)
 
 `predictions` is an array consisting of the probability of belonging to the class for each data point. One can easily check the accuracy by converting these probabilities to class labels and then comparing with labels in `test_y`. See full example script [here](https://github.com/kamran-haider/bbbp_ml_study/blob/master/code/run_toyNN.py).
 
-My starting point for this implementation was material from Week 4 of the first course in Coursera deep learning specialization. Indeed, I have checked the implementation using on a dataset of cat images reproduced the test accuracy of 0.8, which is identical to the implementation provided in the course. I also drew inspiration from another great and more comprehensive implementation I found [here](https://github.com/cstorm125/sophia/blob/master/from_scratch.ipynb). Isn't it amazing that we are living in a world where people do cool stuff on Jupyter notebooks and then make it accessible to everyone?
+My starting point for this implementation was the material from Week 4 of the first course in Coursera deep learning specialization. Indeed, I have checked the implementation using a dataset of cat images and reproduced the test accuracy of 0.8, which is identical to the implementation provided in the course. I also drew inspiration from another great and more comprehensive implementation I found [here](https://github.com/cstorm125/sophia/blob/master/from_scratch.ipynb). Isn't it amazing that we are living in a world where people do cool stuff on Jupyter notebooks and then make it accessible to everyone?
 
 I intend to use this implementation to play around with the basic concepts such as regularization and building more advanced models such as convolutional neural networks. There is definitely a lot of room improvement. Among other things, better documentation and comprehensive unit tests would be great. Nevertheless, I think I have a good toy to play with as I learn more and more about deep learning. 
 
