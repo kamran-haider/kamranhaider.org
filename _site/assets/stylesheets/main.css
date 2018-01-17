@@ -284,7 +284,7 @@ main section:after { content: " "; display: block; clear: both; }
 .inner { max-width: 1024px; }
 
 /* Layout specific adjustments ========================================================================== */
-@media (min-width: 64em) { .layout--post .entry-content, .layout--page .entry-content { width: 87.3417721519%; } }
+@media (min-width: 20em) { .layout--post .entry-content, .layout--page .entry-content { width: 87.3417721519%; } }
 
 .layout--about .entry-wrap { display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; }
 @media (min-width: 48em) { .layout--about .entry-wrap { -ms-flex-wrap: nowrap; flex-wrap: nowrap; } }

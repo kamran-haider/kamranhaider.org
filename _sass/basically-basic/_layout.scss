@@ -69,7 +69,7 @@ main {
 
   .entry-content {
 
-    @include breakpoint($large) {
+    @include breakpoint($small) {
       width: span(14 of 16);
     }
   }
