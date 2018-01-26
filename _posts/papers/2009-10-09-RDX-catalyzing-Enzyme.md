@@ -10,7 +10,8 @@ image:
 published: true
 ---
 
-We solved the structure and investigated the function of a cytochrome P450 enzyme that breaks down royal demolition explosive, using X-ray crystallography, site-directed mutagenisis and biochemical assays.
+We solved the structure and investigated the function of a cytochrome P450 enzyme that breaks down royal demolition explosive, using X-ray crystallography, site-directed mutagenesis and biochemical assays.
+
 
 *Sabbadin F, Jackson R, __Haider K__, Tampi G, Turkenburg JP, Hart S, Bruce NC, Grogan G. The 1.5-Å Structure of XplA-Heme, an
 Unusual Cytochrome P450 Heme Domain That Catalyzes Reductive Biotransformation of Royal Demolition Explosive. [J. Biol. Chem.
