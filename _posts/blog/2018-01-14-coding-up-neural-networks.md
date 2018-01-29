@@ -27,7 +27,7 @@ I am a fan of `scikit-learn` API, which closely follows how machine learning pro
 * Fitting model to the data with `fit()` 
 * Applying the trained model to new data with `predict()`
 
-Following this API and the module organization of `Keras`, I created a module called `models` that consists of different typepes of of deep neural networks that are supported. Currently, only one type is implemented which is called, `BasicDeepModel`. As you'd have guessed, each type of model has `fit()` and `predict()` functions. An example workflow for a binary classification problem would look like:
+Following this API and the module organization of `Keras`, I created a module called `models` that consists of different types of of deep neural networks that are supported. Currently, only one type is implemented which is called, `BasicDeepModel`. As you'd have guessed, each type of model has `fit()` and `predict()` functions. An example workflow for a binary classification problem would look like:
 
 ```python
 from toyNN.models import BasicDeepModel
