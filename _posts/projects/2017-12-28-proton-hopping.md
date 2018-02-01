@@ -3,7 +3,7 @@ layout: external
 title: Modeling Proton Hopping
 role: Investigator
 category: projects
-external_url: None
+external_url: https://github.com/kamran-haider/ProtonHopping
 tags: []
 published: true
 date: 2017-12-28
