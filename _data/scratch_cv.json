@@ -1,0 +1,178 @@
+
+  "profiles":[
+      {
+         "network":"Twitter",
+         "username":"kam_haider",
+         "url":"https://twitter.com/kam_haider"
+      },
+      {
+         "network":"LinkdeIn",
+         "username":"kamranhaidermb",
+         "url":"https://linkedin.com/in/kamranhaidermb"
+      }
+   ],
+"work":[
+   {
+      "company":"Research Foundation City University of New York",
+      "position":"Postdoctoral Research Assosciate",
+      "website":"https://www.rfcuny.org",
+      "startDate":"2013-12-01",
+      "endDate":"",
+      "summary":"Worked on a range of computational chemistry projects with Prof. Tom Kurtzman (01/2014-05/2016, at Lehman College) and with Prof. Marilyn Gunner (06/2016 to present, at City College)",
+      "highlights":[
+         "Developed SSTMap, a cross-platform software tool to analyze large-scale highdimensional simulations with statistical mechanics algorithms.",
+         "Currently working on the development and application of Monte Carlo simulations methods to predict chemical states of biological molecules inside cells."
+      ]
+   },
+   {
+      "company":"Lahore University of Management Sciences",
+      "position":"Lecturer",
+      "website":"https://lums.edu.pk/",
+      "startDate":"2011-04-01",
+      "endDate":"2012-12-10",
+      "summary":"Designed and taught computational biology courses to undergraduate and postgraduate researchers, conducted bioinformatics training workshops for molecular biology researchers and set up a small bioinformatics laboratory.",
+      "highlights":[
+         "Developed predictive models of drug resistance against Hepatitis C Virus therapies in local population, by integrating high-throughput data analysis of DNA sequences with 3-D modeling of protein structures."
+      ]
+   },
+   {
+      "company":"Isotoma Ltd.",
+      "position":"Software Tester",
+      "website":"https://www.isotoma.com/",
+      "startDate":"2009-07-01",
+      "endDate":"2010-01-10",
+      "summary":"Carried out testing of health informatics tools designed for acquisition, storage and retrieval of healthcare data. Interacted with users and provided feedback to developers."
+   },
+   {
+      "company":"European Bioinformatics Institute",
+      "position":"Research Trainee",
+      "website":"https://www.ebi.ac.uk/",
+      "startDate":"2007-03-01",
+      "endDate":"2007-09-01",
+      "summary":"Analyzed signaling networks in post-synaptic neurons. Integrated atomic-scale models into a protein interaction network."
+   }
+],
+"skills":[
+   {
+      "name":"Python",
+      "level": "Proficient",
+      "keywords":[
+         "Proficient"
+      ]
+   },
+   {
+      "name":"C, R, Matlab",
+      "level": "Basic",
+      "keywords":[
+         "Basic"
+      ]
+   },
+   {
+      "name":"Software Development",
+      "level": "Basic",
+      "keywords":[
+         "I adhere to good design practices, version control, unit/integration testing"
+      ]
+   },
+   {
+      "name":"Computational Chemistry",
+      "level": "Proficient",
+      "keywords":[
+         "MD/MC simulations",
+         "Protein-ligand docking",
+         "Binding energy calculations using phaysics-based approaches (MMGB(PB)/SA, FEP)",
+         "Modelling protein structures"
+      ]
+   },
+   {
+      "name":"Data Analysis",
+      "keywords":[
+         "Frequent user of popular data science tools; numpy, scipy, pandas, scikit-learn, matplotlib, jupyter"
+      ]
+   },
+   {
+      "name":"Machine Learning",
+      "keywords":[
+         "Proficient in regression, classification, clustering, multivariate predictive models",
+         "Basic skills in building and training deep learning neural networks",
+         "Strong experience in implementing statistical physics algorithms; Markov Chain Monte Carlo"
+      ]
+   },
+   {
+      "name":"Project Management",
+      "keywords":[
+         "Completed two fully funded research projects as primary investigator, with a significant component of training research staff and managing collaborative research"
+      ]
+   }
+],
+"education":[
+   {
+      "institution":"University of York, UK",
+      "area":"Computational Chemistry",
+      "studyType":"D. Phil.",
+      "startDate":"2007-09-01",
+      "endDate":"2011-01-03"
+   },
+   {
+      "institution":"University of York, UK",
+      "area":"Computational Biology",
+      "studyType":"M. Res.",
+      "startDate":"2006-09-01",
+      "endDate":"2007-08-30"
+   },
+   {
+      "institution":"University of Punjab, Pakistan",
+      "area":"Biotechnology",
+      "studyType": "M.Sc.",
+      "startDate":"2005-09-01",
+      "endDate":"2006-08-30"
+   },
+   {
+      "institution":"University of Punjab, Pakistan",
+      "area":"Biochemistry",
+      "studyType": "B.Sc.",
+      "startDate":"2001-09-01",
+      "endDate":"2005-08-30"
+   }
+],
+"publications":[
+   {
+      "name": "see Papers",
+      "website": "/papers.html",
+   }
+],
+"awards":[
+   {
+      "title":"European Bioinformatics Institute Research Training Fellowship",
+      "date":"2007",
+      "awarder":"European Bioinformatics Institute ",
+      "summary":""
+   },
+   {
+      "title":"Higher Education Commission (HEC) Scholarship for Graduate Studies",
+      "date":"2006 to 2010",
+      "awarder":"Higher Education Commission, Pakistan",
+      "summary":""
+   },
+   {
+      "title":"President’s Talent Farming Award in Chemistry",
+      "date":"2004",
+      "awarder":"Higher Education Commission, Pakistan",
+      "summary":""
+   }
+],
+"languages":[
+   {
+      "language": "TBC",
+      "fluency":""
+   }
+],
+"interests":[
+   {
+      "name": "History of Hollywood"
+   },
+   {
+      "name":"Coffee"
+   }
+]
+}
