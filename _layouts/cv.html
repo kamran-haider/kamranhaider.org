@@ -2,6 +2,8 @@
 layout: default
 ---
 
+{% assign cv = site.data.cv %}
+
 <main id="main" class="page-content" aria-label="Content">
   <div class="index inner">
     <div>{{ content }}</div>
@@ -9,7 +11,7 @@ layout: default
       <div class="entries">
         {% include cv/basics.html %}
       </div>
-    <!--div>
+    <!--<div>
       <div class="entries">
         {% include cv/basics.html %}
         {% include cv/skills.html %}
