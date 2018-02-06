@@ -1,10 +1,10 @@
 <footer id="footer" class="site-footer">
+  <large><a href="{{ site.url }}">Home</a></large>
   <div class="copyright">
-    <medium><a href="{{ site.url }}">Home</medium>
     {% if site.copyright %}
       {{ site.copyright | markdownify }}
     {% else %}
-      <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}.</p>
+      <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}</p>
     {% endif %}
   </div>
 </footer>
