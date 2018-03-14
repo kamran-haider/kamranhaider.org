@@ -40,8 +40,8 @@ protein design. He said, while talking about the motivation  behind designing pr
 **"We don’t know much about proteins, so we thought we should just create them 
 to get a better understanding.”** His nonchalance felt even more impressive after he gave a fascinating talk on his recent work. 
 I thought this must be an empowering feeling, i.e., create things you want to understand. This also reminds me of what Demis
-Hassabis of [DeepMind](https://deepmind.com/) said in one of his talks, **The ultimate expression of understanding something is to be able to recreate it.**, 
-which he points out comes from Richard Feynman's words that **What I cannot build, I do not understand**
+Hassabis of [DeepMind](https://deepmind.com/) said in one of his talks, **"The ultimate expression of understanding something is to be able to recreate it."**, 
+which he points out comes from Richard Feynman's words that **"What I cannot build, I do not understand"**.
 Taking inspiration from this, I have tried to use this idea as a general principle to understand 
 concepts. Obviously, it applies only in cases where there is a tractable way of creating something that directly or indirectly
 sheds ligt on the concept I am trying to learn. That’s why despite the abundance of great deep learning libraries, I wanted to 
