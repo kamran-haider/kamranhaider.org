@@ -13,10 +13,12 @@ date: 2018-02-15
 
 My interest in deep learning began after having conversations with [Bharath Ramsundar](http://rbharath.github.io/) 
 (lead developer of [DeepChem](https://deepchem.io/)) and [Steven Kearnes](https://research.google.com/pubs/StevenKearnes.html) 
-(a Google researcher working on applications of deep learning in drug discovery) at 2017 Gordon Computer-aided Drug Design Conference. 
-I was impressed by their work and by the fact that deep learning neural networks are great at computing complex functions. 
-In my own work, the ability to approximate complex functions is a routine part of the job, except that I am used to working 
-with physics-based methods.
+(a Google researcher working on applications of deep learning in drug discovery) last summer at 2017 Gordon Computer-aided 
+Drug Design Conference. I was impressed by their work and by the fact that deep learning neural networks are great at 
+computing complex functions. In my own work, the ability to approximate complex functions is a routine part of the job, 
+therefore, and given deep learning's success in other fields such as image recognition and natural language processing, 
+I became quite interested. 
+
 
 Within minutes of googling deep learning, I noticed how amazingly easy it is to get started in this area. If you have 
 basic programming skills, the technical barrier is almost non-existent. There are great libraries and tools, such as 
@@ -27,9 +29,9 @@ and [blogs](http://colah.github.io/). I chose Andrew Ng's [Coursera deep learnin
 and Michael Nielsen's online [book](http://neuralnetworksanddeeplearning.com/index.html) as starting points and it has been 
 going wonderfully well. 
 
-To gain a better understanding deep learning neural networks, esepcially the algorithmic aspects, I decided to spend 
+To gain a better understanding deep learning neural networks, especially the algorithmic aspects, I decided to spend 
 some time coding up a simple [implementation](https://github.com/kamran-haider/bbbp_ml_study/tree/master/code/toyNN) of 
-a deep neural network based on whatever I have learnt so far (I call it `toynn`). Obviously, there are infinitely better 
+a deep neural network (named `toynn`) based on whatever I have learnt so far. Obviously, there are infinitely better 
 implementations available in the tools that I mentioned above. However, the motivation behind creating `toynn` was 
 to get a better understanding of how basic deep neural networks really work. 
 
@@ -43,8 +45,8 @@ things better, i.e., 'just build them'. That’s why despite the abundance of gr
 spend some time coding up a neural network from scratch.
 
 I wouldn't go ahead and give an introduction to deep learning or neural networks here and rather point readers to the 
-[first chapter](http://neuralnetworksanddeeplearning.com/chap1.html) of Michael Nielsen's book. I will just add a couple 
-of notes about my implementation. 
+[first chapter](http://neuralnetworksanddeeplearning.com/chap1.html) of Michael Nielsen's book. Here, I will just 
+add a couple  of notes about my implementation. 
 
 I am a huge fan of `scikit-learn` API, which closely follows how machine learning projects are structured in general. 
 Once the data has been adequately pre-processed, a machine learning task can be done with the following steps in `scikit-learn`:
@@ -53,15 +55,15 @@ Once the data has been adequately pre-processed, a machine learning task can be 
 * Fitting model to the data with `fit()` 
 * Applying the trained model to new data with `predict()`
 
-Following this API and the module organization of `Keras`, I created a module called `models` that consists of different 
-types of of deep neural networks that are supported. Currently, only one type is implemented which is called, `BasicDeepModel`. 
+Following this API, I created a module called `models` that consists of different types of of deep neural networks that 
+are supported. Currently, only one type is implemented which is called, `BasicDeepModel`. 
 As you'd have guessed, each type of model has `fit()` and `predict()` functions. The `BasicDeepModel` itself is built from 
-layers, whcih are implemented in a separate module. Currently, the distinction between layers is the non-linearities that 
+layers, whcih are implemented in a separate module. Currently, the distinction between layers is based on the non-linearities that 
 are used to calculate activations of the constituent nodes. For example, currently two layers are supported; `Sigmoid` and 
-`ReLU`. To keep consistnecy in design, an `Input` layer is also implemented whose activations are initialized from the
-neural network inputs, so the forward and backward methods for input layer don't do anything. Nevertheless, coding the inputs
-as a layers class allows me to write compact foward and backward propagation methods for the network. Finally, the `utils` module
-contains some useful functions such as loss functions, derivatives of activation functios and network parameter initialization 
+`ReLU`. To maintain consistency in the design, an `Input` layer is also implemented whose activations are initialized from the
+neural network inputs, so the forward and backward methods for input layer don't really do anything. Nevertheless, coding the inputs
+as a layers class allows me to write compact forward and backward propagation methods for the network. Finally, the `utils` module
+contains some useful functions such as loss functions, their derivatives, and network parameter initialization 
 schemes. 
 
 Now, let's see all of this in action. An example workflow for a binary classification problem would look like:
@@ -100,10 +102,14 @@ in a world where people do cool stuff on Jupyter notebooks and then make it acce
 
 _**Next Steps**_
 
-It would be fun to extend this implementation to  include regularization and more advanced architectures. It would also 
-be good to validate this on the 'Hello, World' of machine learning, i.e., the MNIST dataset. However, for now I am excited 
-about using deep learning to solve problems and as I said there are some amazing tools to get stated.  I would probably return to 
-this toy implementation at some stage to learn more about the algorithmic aspsects of deep learning. In the meantime, I 
-was asked by at least one colleague that they would like to take a look at it and may be tear it apart and rebuild it 
-to learn how it works. So I thought it would be a good idea to share it with everyone. 
-If you are reading this and feel intrigued, feel free to take a look at the [code](https://github.com/kamran-haider/bbbp_ml_study/tree/master/code/toyNN), provide feedback or use it for your own practice.
+The most fun part of coding up a neural network from scratch was to see backpropagation unravel as a set of matrix multiplications, 
+making sure that the correct expressions of loss functions' gradients with respect to network parameters are in place. 
+It would be fun to extend this implementation to include features such as regularization and advanced architectures.
+
+For now, I would continue diving a bit deeper into how neural network can be tuned to solve various problems using 
+some of the existing amazing tools, such as `PyTorch`, `Keras` and `TensorFlow`. Nevertheless, I am glad that I have `toynn`
+to play with whenever I needed to understand something through coding it up. I was also asked by at least one colleague that they 
+would like to take a look at it and may be tear it apart and rebuild it to learn how it works. 
+So I thought it would be a good idea to share it with everyone. 
+If you are reading this and feel intrigued, feel free to take a look at the 
+[code](https://github.com/kamran-haider/bbbp_ml_study/tree/master/code/toyNN), provide feedback or use it for your own practice.
