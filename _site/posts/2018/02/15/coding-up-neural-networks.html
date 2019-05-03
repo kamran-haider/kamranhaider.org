@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<!--
+    Basically Basic Jekyll Theme 1.1.3
+    Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+    Free for personal and commercial use under the MIT license
+    https://github.com/mmistakes/jekyll-basically-theme/blob/master/LICENSE.md
+-->
+<!-- MathJax/LaTeX support -->
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<html lang="en-US" class="no-js">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+    
+    <!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>Coding up a Toy Deep Neural Network | Kamran Haider</title>
+<meta property="og:title" content="Coding up a Toy Deep Neural Network" />
+<meta name="author" content="Kamran Haider" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Learning by doing is the best. I recently attempted implementing a bare-bones deep neural network from scratch and it was so much fun." />
+<meta property="og:description" content="Learning by doing is the best. I recently attempted implementing a bare-bones deep neural network from scratch and it was so much fun." />
+<link rel="canonical" href="http://localhost:4000/posts/2018/02/15/coding-up-neural-networks.html" />
+<meta property="og:url" content="http://localhost:4000/posts/2018/02/15/coding-up-neural-networks.html" />
+<meta property="og:site_name" content="Kamran Haider" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-02-15T00:00:00-05:00" />
+<script type="application/ld+json">
+{"name":null,"description":"Learning by doing is the best. I recently attempted implementing a bare-bones deep neural network from scratch and it was so much fun.","author":{"@type":"Person","name":"Kamran Haider"},"@type":"BlogPosting","url":"http://localhost:4000/posts/2018/02/15/coding-up-neural-networks.html","publisher":null,"image":null,"headline":"Coding up a Toy Deep Neural Network","dateModified":"2018-02-15T00:00:00-05:00","datePublished":"2018-02-15T00:00:00-05:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/2018/02/15/coding-up-neural-networks.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  
+
+  <script>
+    /* Cut the mustard */
+    if ( 'querySelector' in document && 'addEventListener' in window ) {
+      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + 'js';
+    }
+  </script>
+
+  <link rel="stylesheet" href="/assets/stylesheets/main.css">
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:400,400i,600,600i">
+  
+
+  
+    
+    <link rel="alternate" type="application/atom+xml" title="Kamran Haider" href="/atom.xml">
+  
+</head>
+
+
+  <body class="layout--post coding-up-a-toy-deep-neural-network">
+
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#primary-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+
+    <div class="sidebar-toggle-wrapper">
+      <button class="toggle navicon-button larr" type="button">
+        <span class="toggle-inner">
+          <span class="sidebar-toggle-label">Menu</span>
+          <span class="navicon"></span>
+        </span>
+      </button>
+    </div>
+
+    <div id="sidebar" class="sidebar">
+      <div class="inner">
+        <nav id="nav-primary" class="site-nav" itemscope itemtype="http://schema.org/SiteNavigationElement" aria-label="Main navigation">
+  <ul id="menu-main-navigation" class="menu">
+    <!-- Home link -->
+    <li class="menu-item">
+      <a href="/" itemprop="url">
+        <span itemprop="name">Home</span>
+      </a>
+    </li>
+
+    <!-- site.pages links -->
+    
+    
+
+    
+      
+      
+        <li class="menu-item">
+          <a href="/about.html" itemprop="url">
+            <span itemprop="name">About</span>
+          </a>
+        </li>
+      
+    
+      
+      
+        <li class="menu-item">
+          <a href="/cv.html" itemprop="url">
+            <span itemprop="name">Resume</span>
+          </a>
+        </li>
+      
+    
+      
+      
+        <li class="menu-item">
+          <a href="/papers.html" itemprop="url">
+            <span itemprop="name">Papers</span>
+          </a>
+        </li>
+      
+    
+  </ul>
+</nav>
+        <ul class="contact-list">
+  
+    <li>
+      <a href="mailto:kamranhaider.mb@gmail.com">
+        <span class="icon icon--email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="313.1 3.7 16 16"><path d="M318.5 8.9c0-.2.2-.4.4-.4h4.5c.2 0 .4.2.4.4s-.2.4-.4.4h-4.5c-.3 0-.4-.2-.4-.4zm.4 2.1h4.5c.2 0 .4-.2.4-.4s-.2-.4-.4-.4h-4.5c-.2 0-.4.2-.4.4s.1.4.4.4zm3.5 1.2c0-.2-.2-.4-.4-.4h-3.1c-.2 0-.4.2-.4.4s.2.4.4.4h3.1c.2.1.4-.1.4-.4zm-1.5-8.4l-1.7 1.4c-.2.1-.2.4 0 .6s.4.2.6 0l1.4-1.2 1.4 1.2c.2.1.4.1.6 0s.1-.4 0-.6l-1.7-1.4c-.3-.1-.5-.1-.6 0zm7.8 6.2c.1.1.1.2.1.3v7.9c0 .8-.7 1.5-1.5 1.5h-12.5c-.8 0-1.5-.7-1.5-1.5v-7.9c0-.1.1-.2.1-.3l1.6-1.3c.2-.1.4-.1.6 0s.1.4 0 .6l-1.2 1 1.8 1.3v-4c0-.6.5-1.1 1.1-1.1h7.5c.6 0 1.1.5 1.1 1.1v4l1.8-1.3-1.2-1c-.2-.1-.2-.4 0-.6s.4-.2.6 0l1.6 1.3zm-11.6 2.2l4 2.8 4-2.8V7.6c0-.1-.1-.2-.2-.2h-7.5c-.1 0-.2.1-.2.2v4.6zm10.9-1l-4.7 3.4 3.4 2.6c.2.1.2.4.1.6-.1.2-.4.2-.6.1l-3.6-2.8-1.2.8c-.1.1-.3.1-.5 0l-1.2-.8-3.6 2.8c-.2.1-.4.1-.6-.1-.1-.2-.1-.4.1-.6l3.4-2.6-4.7-3.4v7.1c0 .4.3.6.6.6h12.5c.4 0 .6-.3.6-.6v-7.1z"/></svg></span>
+        <span class="label">Email</span>
+      </a>
+    </li>
+  
+
+  
+    <li><a href="https://github.com/kamran-haider">
+  <span class="icon icon--github"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M8 0C3.58 0 0 3.582 0 8c0 3.535 2.292 6.533 5.47 7.59.4.075.547-.172.547-.385 0-.19-.007-.693-.01-1.36-2.226.483-2.695-1.073-2.695-1.073-.364-.924-.89-1.17-.89-1.17-.725-.496.056-.486.056-.486.803.056 1.225.824 1.225.824.714 1.223 1.873.87 2.33.665.072-.517.278-.87.507-1.07-1.777-.2-3.644-.888-3.644-3.953 0-.873.31-1.587.823-2.147-.09-.202-.36-1.015.07-2.117 0 0 .67-.215 2.2.82.64-.178 1.32-.266 2-.27.68.004 1.36.092 2 .27 1.52-1.035 2.19-.82 2.19-.82.43 1.102.16 1.915.08 2.117.51.56.82 1.274.82 2.147 0 3.073-1.87 3.75-3.65 3.947.28.24.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.14.46.55.38C13.71 14.53 16 11.53 16 8c0-4.418-3.582-8-8-8"/></svg></span>
+  <span class="label">GitHub</span>
+</a>
+</li>
+  
+
+  
+    <li><a href="https://twitter.com/kam_haider">
+  <span class="icon icon--twitter"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M16 3.038c-.59.26-1.22.437-1.885.517.677-.407 1.198-1.05 1.443-1.816-.634.37-1.337.64-2.085.79-.598-.64-1.45-1.04-2.396-1.04-1.812 0-3.282 1.47-3.282 3.28 0 .26.03.51.085.75-2.728-.13-5.147-1.44-6.766-3.42C.83 2.58.67 3.14.67 3.75c0 1.14.58 2.143 1.46 2.732-.538-.017-1.045-.165-1.487-.41v.04c0 1.59 1.13 2.918 2.633 3.22-.276.074-.566.114-.865.114-.21 0-.41-.02-.61-.058.42 1.304 1.63 2.253 3.07 2.28-1.12.88-2.54 1.404-4.07 1.404-.26 0-.52-.015-.78-.045 1.46.93 3.18 1.474 5.04 1.474 6.04 0 9.34-5 9.34-9.33 0-.14 0-.28-.01-.42.64-.46 1.2-1.04 1.64-1.7z" fill-rule="nonzero"/></svg></span>
+  <span class="label">Twitter</span>
+</a>
+</li>
+  
+
+  <li>
+    
+      <a href="/atom.xml" title="Atom Feed">
+        <span class="icon icon--rss"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><path d="M12.8 16C12.8 8.978 7.022 3.2 0 3.2V0c8.777 0 16 7.223 16 16h-3.2zM2.194 11.61c1.21 0 2.195.985 2.195 2.196 0 1.21-.99 2.194-2.2 2.194C.98 16 0 15.017 0 13.806c0-1.21.983-2.195 2.194-2.195zM10.606 16h-3.11c0-4.113-3.383-7.497-7.496-7.497v-3.11c5.818 0 10.606 4.79 10.606 10.607z"/></svg></span>
+        <span class="label">Subscribe</span>
+      </a>
+    
+  </li>
+</ul>
+
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="wrapper">
+        
+
+<header id="masthead">
+  <div class="inner">
+    <div class="title-area">
+      
+        <p class="site-title">
+          <a href="/">
+            
+            <span>Kamran Haider</span>
+          </a>
+        </p>
+      
+    </div>
+  </div>
+</header>
+
+        <header class="intro">
+  
+
+  <div class="inner">
+    <div class="intro-text">
+      <h1 class="intro-title">Coding up a Toy Deep Neural Network
+</h1>
+      
+
+      
+        
+
+        <p class="entry-meta">
+          <span class="byline-item">by Kamran Haider</span><span class="byline-item"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="379 72 16 16"><g><g><path fill="none" d="M380.8,86.7h12.3v-8.8h-12.3V86.7z M389.5,78.8h1.7v1.4h-1.7V78.8z M389.5,81.3h1.7v1.4h-1.7V81.3z M389.5,83.8h1.7v1.4h-1.7V83.8z M386.1,78.8h1.7v1.4h-1.7V78.8z M386.1,81.3h1.7v1.4h-1.7V81.3z M386.1,83.8h1.7v1.4h-1.7V83.8z M382.8,78.8h1.7v1.4h-1.7V78.8z M382.8,81.3h1.7v1.4h-1.7V81.3z M382.8,83.8h1.7v1.4h-1.7V83.8z"/><polygon fill="none" points="384.7 75.1 383.4 75.1 383.4 74.3 380.8 74.3 380.8 76.6 393.2 76.6 393.2 74.3 390.6 74.3 390.6 75.1 389.3 75.1 389.3 74.3 384.7 74.3"/><rect x="382.8" y="78.8" width="1.7" height="1.4"/><rect x="386.1" y="78.8" width="1.7" height="1.4"/><rect x="389.5" y="78.8" width="1.7" height="1.4"/><rect x="382.8" y="81.3" width="1.7" height="1.4"/><rect x="386.1" y="81.3" width="1.7" height="1.4"/><rect x="389.5" y="81.3" width="1.7" height="1.4"/><rect x="382.8" y="83.8" width="1.7" height="1.4"/><rect x="386.1" y="83.8" width="1.7" height="1.4"/><rect x="389.5" y="83.8" width="1.7" height="1.4"/><path d="M383.4,72v1.1h-3.8V88h14.9V73.1h-3.8V72h-1.3v1.1h-4.7V72H383.4z M393.2,86.7h-12.3v-8.8h12.3L393.2,86.7L393.2,86.7z M389.3,74.3v0.8h1.3v-0.8h2.5v2.3h-12.3v-2.3h2.5v0.8h1.3v-0.8H389.3z"/></g></g></svg></span><time datetime="2018-02-15T00:00:00-05:00">February 15, 2018</time></span> <span class="byline-item"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="15 309.7 16 16"><g><path d="M23.9 315.1v3.6c0 .5-.4.9-.9.9s-.9-.4-.9-.9v-3.6h1.8z"/><path d="M30.1 317.7c.5 3.9-2.3 7.5-6.2 7.9-3.9.5-7.5-2.3-7.9-6.2-.5-3.9 2.3-7.5 6.2-7.9v-1.8H24v1.8c1.1.1 2.7.7 3.5 1.4l1.3-1.3 1.3 1.3-1.3 1.3c.5.9 1.2 2.5 1.3 3.5zm-1.8.9c0-2.9-2.4-5.3-5.3-5.3s-5.3 2.4-5.3 5.3 2.4 5.3 5.3 5.3 5.3-2.3 5.3-5.3z"/></g></svg></span>5 min read</span>
+        </p>
+      
+
+      
+
+      
+    </div>
+  </div>
+</header>
+
+<main id="main" class="page-content" aria-label="Content">
+  <div class="inner">
+    <article class="entry-wrap">
+      <div class="entry-content">
+        <p>My interest in deep learning began after having conversations with <a href="http://rbharath.github.io/">Bharath Ramsundar</a> 
+(lead developer of <a href="https://deepchem.io/">DeepChem</a>) and <a href="https://research.google.com/pubs/StevenKearnes.html">Steven Kearnes</a> 
+(a Google researcher working on applications of deep learning in drug discovery), last summer at 2017 Gordon Computer-aided 
+Drug Design Conference. I was impressed by their work and by the fact that deep learning neural networks are remarkably 
+successful in computing complex functions. In my own work, the ability to approximate complex functions is a routine part of the job, 
+therefore, I was naturally interested.</p>
+
+<p>Within minutes of googling deep learning, I noticed how amazingly easy it is to get started in this area. If you have 
+basic programming and maths skills, the technical barrier is quite low. There are great libraries and tools, such as 
+<a href="https://keras.io/"><code class="highlighter-rouge">Keras</code></a>, <a href="https://www.tensorflow.org/"><code class="highlighter-rouge">TensorFlow</code></a>, <a href="http://deeplearning.net/software/theano/"><code class="highlighter-rouge">Theano</code></a>, 
+<a href="http://pytorch.org/"><code class="highlighter-rouge">PyTorch</code></a>, and many others that get you started in building and training models very quickly. 
+There is also an amazing amount of learning material available online in the form of <a href="https://www.deeplearning.ai/">courses</a>, 
+<a href="http://neuralnetworksanddeeplearning.com/index.html">books</a>, and <a href="http://colah.github.io/">blogs</a>. 
+I chose Andrew Ng’s <a href="https://www.deeplearning.ai/">Coursera deep learning specialization</a> and Michael Nielsen’s online 
+<a href="http://neuralnetworksanddeeplearning.com/index.html">book</a> as starting points.</p>
+
+<p>To gain a better understanding of deep learning, especially the algorithmic aspects, I decided to spend 
+some time coding up a simple <a href="https://github.com/kamran-haider/toynn">implementation</a> of 
+neural networks (named <code class="highlighter-rouge">toynn</code>) based on whatever I have learnt so far. Obviously, there are infinitely better 
+implementations available in the tools that I mentioned above. However, the motivation behind creating <code class="highlighter-rouge">toynn</code> was 
+to get a better understanding of how basic deep neural networks really work.</p>
+
+<p>As I was coding this up, I was thinking about the idea of learning by doing. I would digress a little bit just to share an anecdote. 
+I was visiting a collaborator at University of Cambridge in December 2012 and got lucky to catch a talk by the great 
+<a href="https://www.bakerlab.org/">David Baker</a>, one of my most favorite scientists and one of the top researchers in the field of
+protein design. He said, while talking about the motivation  behind designing proteins in the laboratory, 
+<strong>“We don’t know much about proteins, so we thought we should just create them 
+to get a better understanding.”</strong> His nonchalance felt even more impressive after he gave a fascinating talk on his recent work. 
+I thought this must be an empowering feeling, i.e., create things you want to understand. This also reminds me of what Demis
+Hassabis of <a href="https://deepmind.com/">DeepMind</a> said in one of his talks, <strong>“The ultimate expression of understanding something is to be able to recreate it.”</strong>, 
+which he points out comes from Richard Feynman’s words that <strong>“What I cannot build, I do not understand”</strong>.
+Taking inspiration from this, I have tried to use this idea as a general principle to understand 
+concepts. Obviously, it applies only in cases where there is a tractable way of creating something that directly or indirectly
+sheds ligt on the concept I am trying to learn. That’s why despite the abundance of great deep learning libraries, I wanted to 
+code up a neural network from scratch.</p>
+
+<p>I wouldn’t go ahead and give an introduction to deep learning or neural networks here and rather point readers to the 
+<a href="http://neuralnetworksanddeeplearning.com/chap1.html">first chapter</a> of Michael Nielsen’s book. Here, I will just 
+add a couple  of notes about my implementation.</p>
+
+<p>I am a huge fan of <code class="highlighter-rouge">scikit-learn</code> estimator API, which closely follows how machine learning projects are structured in general. 
+Once the data has been adequately pre-processed, a machine learning task can be done with the following steps in <code class="highlighter-rouge">scikit-learn</code>:</p>
+
+<ul>
+  <li>Choosing a model</li>
+  <li>Fitting model to the data with <code class="highlighter-rouge">fit()</code></li>
+  <li>Applying the trained model to new data with <code class="highlighter-rouge">predict()</code></li>
+  <li>Refine and fine-tune the model</li>
+</ul>
+
+<p>Following this API, I created a module called <code class="highlighter-rouge">models</code> that consists of different types of neural networks that 
+are supported. Currently, only one type is implemented which is called, <code class="highlighter-rouge">BasicDeepModel</code>. 
+As you’d have guessed, each type of model has <code class="highlighter-rouge">fit()</code> and <code class="highlighter-rouge">predict()</code> functions. The <code class="highlighter-rouge">BasicDeepModel</code> itself is built from 
+layers, whcih are implemented in a separate module <code class="highlighter-rouge">layers</code>. Currently, the distinction between layers is based on the non-linearities that 
+are used to calculate activations of the constituent nodes. For example, two layers are supported; <code class="highlighter-rouge">Sigmoid</code> and 
+<code class="highlighter-rouge">ReLU</code>, which use sigmoid and ReLU activation functions, respectively. To maintain consistency in the design, an <code class="highlighter-rouge">Input</code> 
+layer is also implemented whose activations are initialized from the neural network inputs. The forward and backward methods 
+for input layer don’t really do anything. However, coding the inputs as a layers class allows me to write compact 
+forward and backward propagation methods for the network. Finally, the <code class="highlighter-rouge">utils</code> module contains some useful functions,
+such as loss functions, their derivatives, and network parameter initialization schemes.</p>
+
+<p>Now, let’s see all of this in action. An example workflow for a binary classification problem would look like:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">toynn.models</span> <span class="kn">import</span> <span class="n">BasicDeepModel</span>
+<span class="kn">from</span> <span class="nn">toynn.layers</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">toynn.utils</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">training_data</span> <span class="o">=</span> <span class="s">"../toynn/tests/test_datasets/train_catvnoncat.h5"</span>
+<span class="n">test_data</span> <span class="o">=</span> <span class="s">"../toynn/tests/test_datasets/test_catvnoncat.h5"</span>
+<span class="n">train_x_orig</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">test_x_orig</span><span class="p">,</span> <span class="n">test_y</span><span class="p">,</span> <span class="n">classes</span> <span class="o">=</span> <span class="n">load_test_data</span><span class="p">(</span><span class="n">training_data</span><span class="p">,</span> <span class="n">test_data</span><span class="p">)</span>
+<span class="n">num_px</span> <span class="o">=</span> <span class="n">train_x_orig</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c"># Pre-processing of data</span>
+<span class="n">train_x_flatten</span> <span class="o">=</span> <span class="n">train_x_orig</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">train_x_orig</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">test_x_flatten</span> <span class="o">=</span> <span class="n">test_x_orig</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">test_x_orig</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">train_x</span> <span class="o">=</span> <span class="n">train_x_flatten</span><span class="o">/</span><span class="mf">255.</span>
+<span class="n">test_x</span> <span class="o">=</span> <span class="n">test_x_flatten</span><span class="o">/</span><span class="mf">255.</span>
+
+<span class="n">input_layer_nodes</span> <span class="o">=</span> <span class="n">num_px</span> <span class="o">*</span> <span class="n">num_px</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="n">Input</span><span class="p">(</span><span class="n">input_layer_nodes</span><span class="p">),</span> <span class="n">ReLU</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="n">ReLU</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">ReLU</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">Sigmoid</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">BasicDeepModel</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">layers</span><span class="p">,</span> <span class="n">weight_initialization</span><span class="o">=</span><span class="s">"custom"</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.0075</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="mi">2500</span><span class="p">)</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_x</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">predictions</code> is an array consisting of the probability of belonging to the class for each data point. 
+One can easily check the accuracy by converting these probabilities to class labels and then comparing with labels in 
+<code class="highlighter-rouge">test_y</code>. See full example in a jupyter notebook <a href="https://github.com/kamran-haider/toyNN/blob/master/examples/01-recognizing-cat-images.ipynb">here</a>.
+My starting point for this implementation was the material from Week 4 of the first course in Coursera deep learning specialization. 
+I have checked the implementation using a dataset of cat images and reproduced the test accuracy of 0.8, which is identical 
+to the implementation provided in the course. I also drew inspiration from another great and more comprehensive implementation
+I found <a href="https://github.com/cstorm125/sophia/blob/master/from_scratch.ipynb">here</a>. Isn’t it amazing that we are living 
+in a world where people do cool stuff on Jupyter notebooks and then make it accessible to everyone?</p>
+
+<p>The most fun part of coding up a neural network from scratch was to see backpropagation unravel as a set of matrix multiplications.
+There is definitely a lot of room for improvement and enhancements in <code class="highlighter-rouge">toynn</code>, such as better documentation, unit tests and 
+features such as regularization and advanced architectures. For now, I would continue diving a bit deeper into how neural 
+networks can be tuned to solve various problems using some of the existing amazing tools, such as 
+<code class="highlighter-rouge">PyTorch</code>, <code class="highlighter-rouge">Keras</code> and <code class="highlighter-rouge">TensorFlow</code>. Nevertheless, I am glad that I have <code class="highlighter-rouge">toynn</code> to play with whenever 
+I needed to understand something through coding. I was also asked by at least one colleague that they 
+would like to take a look at it and may be tear it apart and rebuild it to learn how it works. 
+So I thought it would be a good idea to share it with everyone. 
+If you are reading this and feel intrigued, feel free to take a look at the 
+<a href="https://github.com/kamran-haider/toynn">code</a>, provide feedback or use it for your own practice.</p>
+
+      </div>
+      
+    </article>
+
+    <footer id="footer" class="site-footer">
+  <large><a href="http://localhost:4000">Home</a></large>
+  <div class="copyright">
+    
+      <p>&copy; 2019 Kamran Haider</p>
+    
+  </div>
+</footer>
+
+  </div>
+</main>
+
+      </div>
+    </div>
+
+    
+
+<script async src="/assets/javascripts/main.js"></script>
+
+  </body>
+
+</html>
