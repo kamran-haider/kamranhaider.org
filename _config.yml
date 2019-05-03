@@ -17,7 +17,7 @@ lang: en-US
 title: Kamran Haider
 email: kamranhaider.mb@gmail.com
 description: Ensemble of Thoughts
-baseurl: / # the optional subpath of your site, e.g. "/blog"
+
 url: http://kamranhaider.org # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 author:
   name: Kamran Haider
@@ -75,3 +75,13 @@ defaults:
     values:
       layout: post
       read_time: true
+
+assets:
+  assets:
+    - "*.svg"
+  sources:
+    - _svg
+
+sass:
+  sass_dir: assets/sass
+  style: compressed
