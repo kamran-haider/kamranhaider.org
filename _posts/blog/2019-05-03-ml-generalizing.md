@@ -7,7 +7,7 @@ last_modified_at:
 tags: 
   - Python
   - Machine Learning
-published: true
+published: false
 date: 2019-05-03
 ---
 
@@ -15,5 +15,5 @@ date: 2019-05-03
 I recently came across a machine learning review
 
 <figure>
-    {% asset output_10_0.svg %}
+    {% asset test.png %}
 </figure>
