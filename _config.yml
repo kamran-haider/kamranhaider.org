@@ -19,6 +19,7 @@ email: kamranhaider.mb@gmail.com
 description: Ensemble of Thoughts
 
 url: http://khaider.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+baseurl: ""
 author:
   name: Kamran Haider
   twitter: kam_haider
