@@ -1,0 +1,10 @@
+*.DS_Store
+*.swp
+*.sass-cache*
+*.env
+*.ipynb_checkpoints
+*.asset-cache
+.jekyll-cache/*
+_layouts/_site/*
+Gemfile.lock
+_site/assets/.*
