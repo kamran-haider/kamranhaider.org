@@ -299,10 +299,6 @@ Training Error	Test Error
 
 This is the easiest situation. The simplest model easily captures the main trend in the data. Since, we are already at the lowest possible test error with the linear model, therefore, it isn't necessary to increase the model complexity. Even if we do so, nothing really changes. 
 
-Let's repeat the same experiment but this time let's generate the underlying data from the non-linear function (which is a 10th degree polynomial). 
-
-Now we see that both training and test errors decrease as we increase model complexity. As soon as we fit a 10th degree polynomial, we are all set, no generalization error. In other words, in the noise-less case, our problem simply reduces to making sure that our model belongs to the same class as the data generating function.
-
 ### Experiment 2
 * No noise in the data, $$\sigma = 0$$
 * Small training dataset, $$m_{train} = 10$$
@@ -329,7 +325,8 @@ Training Error	Test Error
 </center>
 
 
-In this case, we still have no noise in the measurements but we begin with a model that is outside of the class that generates the model and increase complexity eventually matching up with the model that generated the data. As expexted, since the patterns in the data are real, the simpler models tend to ignore them and underfit. Underfitting is characterized by poor performance on both training and test sets, as seen in the table. As we increase the model complexity, we can reduce errors on both training and test sets. Just to reiterate, the reason why training and test set performances improve concomitantly with complex models and in the absence of noise is that any patterns in the training data can be assumed to be genuine and hence a complex model can account for such patterns. 
+In this case, we still have no noise in the measurements but we begin with a model that is outside of the class that generates the model and increase complexity eventually matching up with the model that generated the data. As expexted, since the patterns in the data are real, the simpler models tend to ignore them and underfit. Underfitting is characterized by poor performance on both training and test sets, as seen in the table. As we increase the model complexity, we can reduce errors on both training and test sets. Just to reiterate, the reason why training and test set performances improve concomitantly with complex models and in the absence of noise is that any patterns in the training data can be assumed to be genuine and hence a complex model can account for such patterns.  In the noise-less case, our problem simply reduces to making sure that our model belongs to the same class as the data generating function.
+
 
 Let's move into the real world now and introduce some noise.
 
